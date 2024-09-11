@@ -172,45 +172,264 @@
                     <h3>Presidente</h3>
                     <p>Guillermo Rivas</p>
                 </div>
-                <div class="cargo" data-funciones="Gestionar las finanzas del condominio, incluyendo presupuestos y gastos.">
-                    <h3>Tesorero</h3>
-                    <p>Carlos Miranda</p>
-                </div>
-                <div class="cargo" data-funciones="Mantener registros y actas de las reuniones del comité y la comunidad.">
-                    <h3>Secretario</h3>
-                    <p>Sami Donoso</p>
-                </div>
-                <div class="linea-horizontal"></div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condominio Cumbres de Quilpué</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #50c878;
+            --accent-color: #ff6b6b;
+            --background-color: #f0f8ff;
+            --text-color: #333;
+            --line-color: #2c3e50;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        /* Estilos para la barra de navegación */
+        nav {
+            background-color: var(--primary-color);
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: var(--secondary-color);
+        }
+        /* Estilos para las pestañas de contenido */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Aquí van los estilos existentes del organigrama */
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #sizeSlider {
+            width: 80%;
+            max-width: 300px;
+        }
+        .organigrama {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .nivel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+            position: relative;
+        }
+        .cargo {
+            background-color: #fff;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            width: calc(100% - 20px);
+            max-width: 300px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .cargo:hover {
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+        }
+        .cargo h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+        .cargo p {
+            margin: 5px 0 0;
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+        .linea-vertical {
+            position: absolute;
+            width: 2px;
+            background-color: var(--line-color);
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .linea-horizontal {
+            position: absolute;
+            height: 2px;
+            background-color: var(--line-color);
+            bottom: -10px;
+            left: 10%;
+            right: 10%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            .cargo {
+                width: calc(33.33% - 20px);
+            }
+            .linea-horizontal {
+                left: 25%;
+                right: 25%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                padding: 40px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .cargo {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showTab('inicio')">Inicio</a></li>
+            <li><a href="#" onclick="showTab('organigrama')">Organigrama</a></li>
+            <li><a href="#" onclick="showTab('servicios')">Servicios</a></li>
+            <li><a href="#" onclick="showTab('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Condominio Cumbres de Quilpué</h1>
+
+        <div id="inicio" class="tab-content active">
+            <h2>Bienvenidos al Condominio Cumbres de Quilpué</h2>
+            <p>Aquí puedes añadir información general sobre el condominio, su historia, características principales, etc.</p>
+        </div>
+
+        <div id="organigrama" class="tab-content">
+            <h2>Organización Condominio Cumbres de Quilpué</h2>
+            <div class="controls">
+                <label for="sizeSlider">Tamaño del organigrama: </label>
+                <input type="range" id="sizeSlider" min="50" max="150" value="100">
             </div>
-            <div class="nivel">
-                <div class="cargo" data-funciones="Supervisar las operaciones diarias del condominio y gestionar el personal.">
-                    <h3>Administrador 1</h3>
-                    <p>Diego Acevedo</p>
+            <div class="organigrama">
+                <!-- Aquí va el contenido existente del organigrama -->
+                <div class="nivel">
+                    <div class="cargo" data-funciones="Liderar el comité de administración y tomar decisiones estratégicas para el condominio.">
+                        <h3>Presidente</h3>
+                        <p>Guillermo Rivas</p>
+                    </div>
+                    <div class="cargo" data-funciones="Gestionar las finanzas del condominio, incluyendo presupuestos y gastos.">
+                        <h3>Tesorero</h3>
+                        <p>Carlos Miranda</p>
+                    </div>
+                    <div class="cargo" data-funciones="Mantener registros y actas de las reuniones del comité y la comunidad.">
+                        <h3>Secretario</h3>
+                        <p>Sami Donoso</p>
+                    </div>
+                    <div class="linea-horizontal"></div>
                 </div>
-                <div class="cargo" data-funciones="Apoyar en la administración y gestión de proyectos especiales del condominio.">
-                    <h3>Administrador 2</h3>
-                    <p>Nelson Villalobos</p>
-                </div>
-                <div class="linea-horizontal"></div>
+                <!-- ... Resto del organigrama ... -->
             </div>
-            <div class="nivel">
-                <div class="cargo" data-funciones="Supervisar el mantenimiento general del condominio y coordinar al personal.">
-                    <h3>Mayordomo</h3>
-                    <p>Rodrigo Vásquez</p>
-                </div>
-                <div class="linea-horizontal"></div>
-            </div>
-            <div class="nivel">
-                <div class="cargo" data-funciones="Mantener la seguridad y el orden en las áreas comunes del condominio.">
-                    <h3>Conserjes</h3>
-                </div>
-                <div class="cargo" data-funciones="Mantener la limpieza y el orden en todas las áreas comunes del condominio.">
-                    <h3>Personal de Aseo</h3>
-                </div>
-                <div class="cargo" data-funciones="Suministrar bienes y servicios necesarios para el funcionamiento del condominio.">
-                    <h3>Proveedores</h3>
-                </div>
-            </div>
+        </div>
+
+        <div id="servicios" class="tab-content">
+            <h2>Servicios del Condominio</h2>
+            <ul>
+                <li>Seguridad 24/7</li>
+                <li>Áreas verdes</li>
+                <li>Mantenimiento de instalaciones</li>
+                <li>Recolección de basura</li>
+                <!-- Añade más servicios según sea necesario -->
+            </ul>
+        </div>
+
+        <div id="contacto" class="tab-content">
+            <h2>Contacto</h2>
+            <p>Dirección: [Dirección del condominio]</p>
+            <p>Teléfono: [Número de teléfono]</p>
+            <p>Email: [Correo electrónico]</p>
+            <!-- Puedes añadir un formulario de contacto aquí si lo deseas -->
         </div>
     </div>
 
@@ -223,6 +442,15 @@
     </div>
 
     <script>
+        // Función para mostrar pestañas
+        function showTab(tabId) {
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let tab of tabs) {
+                tab.classList.remove('active');
+            }
+            document.getElementById(tabId).classList.add('active');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const cargos = document.querySelectorAll('.cargo');
             const modal = document.getElementById('modal');
@@ -310,4 +538,5 @@
         });
     </script>
 </body>
+</html>
 </html>
